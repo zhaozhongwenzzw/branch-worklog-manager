@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Branch Ledger</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="toolbar-main">
+          <label class="field search-field">
+            <span>搜索</span>
+            <input id="searchInput" type="search" placeholder="搜索项目、分支或历史内容" />
+          </label>
+
+          <label class="field compact-field">
+            <span>项目</span>
+            <select id="projectFilter">
+              <option value="">全部项目</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="projectPanelButton" class="secondary-button" type="button">项目概览</button>
+          <button id="archivePanelButton" class="secondary-button" type="button">已归档</button>
+          <button id="currentChangeButton" class="primary-button" type="button">记录当前工作区变更</button>
+          <button id="reloadButton" class="ghost-button" type="button">刷新</button>
+        </div>
+      </header>
+
+      <main class="main-layout">
+        <aside class="workspace-sidebar">
+          <section class="workspace-card">
+            <p class="eyebrow">CURRENT WORKSPACE</p>
+            <h1>Branch Ledger</h1>
+            <p class="workspace-copy">左侧聚焦当前工作区，右侧只保留分支列表，方便快速观察。</p>
+
+            <div class="workspace-grid">
+              <div>
+                <span>项目</span>
+                <strong id="contextProject">-</strong>
+              </div>
+              <div>
+                <span>分支</span>
+                <strong id="contextBranch">-</strong>
+              </div>
+              <div class="full-row">
+                <span>本地地址</span>
+                <strong id="contextPath">-</strong>
+              </div>
+              <div class="full-row">
+                <span>说明</span>
+                <p id="contextMessage" class="context-message">正在加载工作区上下文...</p>
+              </div>
+            </div>
+
+            <div class="workspace-actions">
+              <button id="refreshContextButton" class="ghost-button compact-button" type="button">刷新上下文</button>
+            </div>
+          </section>
+
+          <section class="stats-card">
+            <p class="eyebrow">VISIBLE BRANCHES</p>
+            <div class="stats-list">
+              <article class="stat-row">
+                <span>分支</span>
+                <strong id="branchCount">0</strong>
+              </article>
+              <article class="stat-row">
+                <span>已归档</span>
+                <strong id="archivedCount">0</strong>
+              </article>
+              <article class="stat-row">
+                <span>项目</span>
+                <strong id="projectCount">0</strong>
+              </article>
+            </div>
+          </section>
+        </aside>
+
+        <section class="branch-stage">
+          <div class="branch-stage-header">
+            <div>
+              <p class="eyebrow">BRANCH LIST</p>
+              <h2>分支内容</h2>
+            </div>
+            <strong id="listSummary">0 个分支</strong>
+          </div>
+
+          <div id="branchList" class="branch-list empty">暂无分支记录</div>
+        </section>
+      </main>
+    </div>
+
+    <aside id="projectPanel" class="project-panel" aria-hidden="true">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">PROJECT OVERVIEW</p>
+          <h3>项目概览</h3>
+        </div>
+        <button id="closeProjectPanelButton" class="panel-close-button" type="button" aria-label="关闭项目概览">X</button>
+      </div>
+      <div id="projectBoard" class="project-board empty">暂无项目统计</div>
+    </aside>
+
+    <aside id="archivePanel" class="project-panel archive-panel" aria-hidden="true">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">ARCHIVED BRANCHES</p>
+          <h3>归档分支</h3>
+        </div>
+        <button id="closeArchivePanelButton" class="panel-close-button" type="button" aria-label="关闭归档分支">X</button>
+      </div>
+      <div id="archiveBoard" class="project-board empty">暂无归档分支</div>
+    </aside>
+
+    <aside id="timelineDrawer" class="timeline-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">BRANCH TIMELINE</p>
+          <h3 id="drawerTitle">选择一个分支</h3>
+          <p id="drawerSubtitle" class="drawer-subtitle">点击右侧分支后，在这里查看时间轴详情。</p>
+        </div>
+        <button id="closeDrawerButton" class="ghost-button compact-button" type="button">关闭</button>
+      </div>
+
+      <section class="drawer-branch-card">
+        <div class="drawer-branch-topline">
+          <div class="drawer-branch-identity">
+            <div class="drawer-mini-meta">
+              <span>项目</span>
+              <strong id="drawerProject">-</strong>
+            </div>
+            <div class="drawer-mini-meta">
+              <span>分支</span>
+              <strong id="drawerBranch">-</strong>
+            </div>
+          </div>
+          <div class="drawer-branch-actions">
+            <button id="drawerStatusButton" class="secondary-button compact-button" type="button">未上线</button>
+            <button id="appendChangeButton" class="primary-button" type="button">追加变更</button>
+            <button id="archiveBranchButton" class="ghost-button compact-button" type="button">归档</button>
+          </div>
+        </div>
+
+        <div class="drawer-branch-grid compact-grid">
+          <div class="drawer-stat-pill">
+            <span>节点</span>
+            <strong id="drawerCount">0</strong>
+          </div>
+          <div class="drawer-stat-pill drawer-stat-pill-wide">
+            <span>最近更新时间</span>
+            <strong id="drawerUpdated">-</strong>
+          </div>
+        </div>
+
+        <div class="drawer-pathline">
+          <div class="full-row">
+            <span>本地地址</span>
+            <strong id="drawerPath">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="appendComposer" class="append-composer hidden">
+        <div class="composer-header">
+          <div>
+            <p class="eyebrow">APPEND CHANGE</p>
+            <h4 id="appendHeading">追加新的时间轴节点</h4>
+          </div>
+          <button id="appendCancelButton" class="ghost-button compact-button" type="button">取消</button>
+        </div>
+
+        <form id="appendForm" class="composer-form">
+          <label class="field">
+            <span>总结</span>
+            <input id="appendSummaryInput" type="text" placeholder="一句话总结本次变更" />
+          </label>
+
+          <label class="field">
+            <span>本地地址</span>
+            <input id="appendLocalPathInput" type="text" placeholder="例如 D:\\work\\hello-admin" />
+          </label>
+
+          <label class="field">
+            <span>详细记录内容</span>
+            <textarea id="appendDetailInput" rows="8" placeholder="详细描述本次修改内容、接口、测试、备注等信息"></textarea>
+          </label>
+
+          <div class="composer-actions">
+            <button id="appendSaveButton" class="primary-button" type="submit">追加到时间轴</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="timeline-section">
+        <div class="timeline-section-header">
+          <span>时间轴节点</span>
+          <strong id="timelineSummary">0 条</strong>
+        </div>
+        <div id="timelineList" class="timeline-list empty">请选择一个分支查看时间轴</div>
+      </section>
+    </aside>
+
+    <div id="overlayBackdrop" class="overlay-backdrop hidden"></div>
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
