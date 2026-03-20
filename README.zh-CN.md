@@ -28,10 +28,8 @@
 当这个仓库发布到 GitHub 后，可以直接对 Codex 说：
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/<owner>/<repo>/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/zhaozhongwenzzw/branch-worklog-manager/refs/heads/main/.codex/INSTALL.md
 ```
-
-将 `<owner>` 和 `<repo>` 替换成你实际发布后的 GitHub 仓库路径。
 
 ### Claude Code
 

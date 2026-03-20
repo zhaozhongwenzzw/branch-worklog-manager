@@ -7,10 +7,8 @@ Guide for using Branch Worklog Manager with OpenAI Codex via native skill discov
 Tell Codex:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/<owner>/<repo>/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/zhaozhongwenzzw/branch-worklog-manager/refs/heads/main/.codex/INSTALL.md
 ```
-
-Replace `<owner>` and `<repo>` with your GitHub repository path after publishing.
 
 ## Manual Installation
 
@@ -24,7 +22,7 @@ Replace `<owner>` and `<repo>` with your GitHub repository path after publishing
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/<owner>/<repo>.git ~/.codex/branch-worklog-manager
+   git clone https://github.com/zhaozhongwenzzw/branch-worklog-manager.git ~/.codex/branch-worklog-manager
    ```
 
 2. Make the skill visible to Codex:

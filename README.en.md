@@ -28,10 +28,8 @@
 Once this repository is published to GitHub, you can tell Codex:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/<owner>/<repo>/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/zhaozhongwenzzw/branch-worklog-manager/refs/heads/main/.codex/INSTALL.md
 ```
-
-Replace `<owner>` and `<repo>` with your actual GitHub repository path.
 
 ### Claude Code
 
