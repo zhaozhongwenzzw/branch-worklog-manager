@@ -15,5 +15,6 @@ Branch Worklog Manager is a local-first skill for recording branch work as Markd
 
 - [中文安装与使用](./README.zh-CN.md#安装)
 - [English Installation & Usage](./README.en.md#installation)
+- [Codex Install Guide](./.codex/INSTALL.md)
 - [Skill Instructions](./SKILL.md)
 - [Data Format Reference](./references/data-format.md)

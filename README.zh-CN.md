@@ -23,6 +23,16 @@
 
 ## 安装
 
+### Codex 快速安装
+
+当这个仓库发布到 GitHub 后，可以直接对 Codex 说：
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/<owner>/<repo>/refs/heads/main/.codex/INSTALL.md
+```
+
+将 `<owner>` 和 `<repo>` 替换成你实际发布后的 GitHub 仓库路径。
+
 ### Claude Code
 
 官方文档：
@@ -77,6 +87,7 @@ codex
 
 - `~/.agents/skills/...` 是当前本地环境的约定目录。
 - 不同 Codex 环境可能使用不同的本地 skill 路径。
+- 当前已经提供 Codex 的 AI 安装入口文档：[`.codex/INSTALL.md`](./.codex/INSTALL.md)
 
 ## 使用
 

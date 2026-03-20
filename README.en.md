@@ -23,6 +23,16 @@
 
 ## Installation
 
+### Codex Quick Install
+
+Once this repository is published to GitHub, you can tell Codex:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/<owner>/<repo>/refs/heads/main/.codex/INSTALL.md
+```
+
+Replace `<owner>` and `<repo>` with your actual GitHub repository path.
+
 ### Claude Code
 
 Official documentation:
@@ -77,6 +87,7 @@ Important:
 
 - `~/.agents/skills/...` is the local convention used in this environment.
 - Different Codex environments may use different local skill directories.
+- A Codex AI-install entrypoint is provided in [`.codex/INSTALL.md`](./.codex/INSTALL.md).
 
 ## Usage
 
